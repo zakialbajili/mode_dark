@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet" />
+  <title>DARK-MODE</title>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <a onclick="restart()" id="home">HOME</a>
+      <a onclick="darkMode()" id="mode">MODE</a>
+    </nav>
+    <h1>HELLO WORLD</h1>
+    <p class="info" id="info"></p>
+  </div>
+  <script>
+    let body = document.body;
+    let info = document.getElementById("info");
+    let mode = document.getElementById("mode");
+    let home = document.getElementById("home");
+    const darkLimit = 5;
+    let darkCounter = 0;
+    let darkRemainingLeft;
+
+    function darkMode() {
+      if (darkRemainingLeft == 1) {
+        info.textContent = `Anda sudah tidak dapat merubah mode`;
+        mode.style.display = 'none';
+        home.textContent = `RESTART`;
+        body.classList.toggle("dark");
+        return;
+      }
+      else {
+        darkCounter += 1;
+        darkRemainingLeft = darkLimit - darkCounter;
+        if (darkRemainingLeft % 2 == 0) {
+          info.textContent = `mode terpakai: ${darkCounter}x, sisa mode: ${darkRemainingLeft}`
+          mode.textContent = 'MODE-LIGHT';
+          home.textContent = `HOME`;
+        }
+        else if (darkRemainingLeft % 2 == 1) {
+          info.textContent = `mode terpakai: ${darkCounter}x, sisa mode: ${darkRemainingLeft}`
+          mode.textContent = 'MODE-DARK';
+          home.textContent = `HOME`;
+        }
+      }
+    }
+    function restart() {
+      location.reload();
+    }
+  </script>
+</body>
+
+</html>
